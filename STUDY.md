@@ -29,3 +29,5 @@ h(
 ),
 ```
 在子组件调用这些插槽的时候，通过了renderSlot函数执行收集起来的slots，因为在初始化组件的时候，instance.slots就将当前页面的slots收集了起来。
+
+## setup
