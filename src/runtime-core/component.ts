@@ -5,7 +5,7 @@ import { PublicInstanceProxyHandlers } from "./componentPublicInstance";
 import { proxyRefs, shallowReadonly } from "../reactivity/src";
 export function createComponentInstance(vnode, parent) {
   const instance = {
-    type: vnode.type,
+    type: vnode.type, // 当前的组件原始对象
     vnode,
     next: null, // 需要更新的 vnode，用于更新 component 类型的组件
     props: {},
@@ -27,13 +27,14 @@ export function createComponentInstance(vnode, parent) {
   };
 
   // 赋值 emit
-  // 这里使用 bind 把 instance 进行绑定
+  // 这里使用 bind 把 instance 进行绑定，可以直接调用instance内部的任何数据
   // 后面用户使用的时候只需要给 event 和参数即可
   instance.emit = emit.bind(null, instance) as any;
 
   return instance;
 }
 
+// 加工组件，让其更加的细致
 export function setupComponent(instance) {
   // 1. 处理 props
   // 取出存在 vnode 里面的 props

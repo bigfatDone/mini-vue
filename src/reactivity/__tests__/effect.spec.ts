@@ -48,6 +48,20 @@ describe("effect", () => {
     expect(dummy).toBe(0);
     counter.nested.num = 8;
     expect(dummy).toBe(8);
+
+    const foo = reactive({
+      count: 0,
+      name: "cui",
+    });
+  
+    effect(() => {
+      effect(() => {
+        console.log("inside effect: ", foo.name);
+      });
+      console.log("outside effect: ", foo.count);
+    });
+  
+    foo.count++;
   });
 
   it("should observe function call chains", () => {

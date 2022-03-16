@@ -469,6 +469,7 @@ export function createRenderer(options) {
 
   function mountComponent(initialVNode, container, parentComponent) {
     // 1. 先创建一个 component instance
+    // 将组件内部的参数初始化
     const instance = (initialVNode.component = createComponentInstance(
       initialVNode,
       parentComponent

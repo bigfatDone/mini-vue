@@ -4,6 +4,21 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
+    // launch.js
+    {
+      "name": "mini-vue",
+      "request": "launch",
+      "type": "pwa-chrome",
+      "url": "http://localhost:5502", // 这个必须是要和项目开启的端口是同一个端口，这样才能监听到
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "vue3-slots",
+      "type": "chrome",
+      "request": "launch",
+      "sourceMaps": true, // 开启sourcemap
+      "file": "${workspaceRoot}/example/slotsComponent/index.html" // 每个文件都单独配置
+    },
     {
       "type": "node",
       "name": "vscode-jest-tests",

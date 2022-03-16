@@ -1,9 +1,14 @@
 import { ShapeFlags } from "../shared";
+/**
+ * 
+ * 总结：将插槽全部收集起来，并且放在instance.slots
+ */
 export function initSlots(instance, children) {
   const { vnode } = instance;
 
   console.log("初始化 slots");
 
+  // 这个判断了组件的子节点是插槽类型
   if (vnode.shapeFlag & ShapeFlags.SLOTS_CHILDREN) {
     normalizeObjectSlots(children, (instance.slots = {}));
   }

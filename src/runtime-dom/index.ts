@@ -4,6 +4,7 @@
 import { isOn } from "../shared";
 import { createRenderer } from "../runtime-core";
 
+// 实现了简单的操作DOM
 // 后面也修改成和源码一样的实现
 function createElement(type) {
   console.log("CreateElement", type);
@@ -78,6 +79,7 @@ let renderer;
 
 function ensureRenderer() {
   // 如果 renderer 有值的话，那么以后都不会初始化了
+  // 说明已经被初始化过了
   return (
     renderer ||
     (renderer = createRenderer({
@@ -92,6 +94,7 @@ function ensureRenderer() {
   );
 }
 
+// 函数科里化
 export const createApp = (...args) => {
   return ensureRenderer().createApp(...args);
 };

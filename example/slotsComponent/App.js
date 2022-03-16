@@ -6,6 +6,9 @@ export default {
   setup() {},
 
   render() {
+    console.log('--------------1111-----------');
+    console.log(this.$slots);
+    console.log('--------------1111-----------');
     return h("div", {}, [
       h("div", {}, "你好"),
       h(

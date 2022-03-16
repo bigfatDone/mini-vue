@@ -13,6 +13,8 @@ export const createVNode = function (
   // createVNode("div")
   // type 为组件对象的时候
   // createVNode(App)
+
+  // 创建基本属性
   const vnode = {
     el: null,
     component: null,
@@ -20,7 +22,7 @@ export const createVNode = function (
     type,
     props: props || {},
     children,
-    shapeFlag: getShapeFlag(type),
+    shapeFlag: getShapeFlag(type), // 判断type的类型
   };
 
   // 基于 children 再次设置 shapeFlag
@@ -35,6 +37,7 @@ export const createVNode = function (
   return vnode;
 };
 
+// 层层判断，计算出vnode的shapeFlags
 export function normalizeChildren(vnode, children) {
   if (typeof children === "object") {
     // 暂时主要是为了标识出 slots_children 这个类型来
