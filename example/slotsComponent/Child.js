@@ -3,8 +3,6 @@ export default {
   name: "Child",
   setup(props, context) {},
   render() {
-    console.log('-------------------------');
-    console.log(this.$slots);
     return h("div", {}, [
       h("div", {}, "child"),
       // renderSlot 会返回一个 vnode

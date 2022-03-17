@@ -70,10 +70,12 @@ function setupStatefulComponent(instance) {
   if (setup) {
     // 设置当前 currentInstance 的值
     // 必须要在调用 setup 之前
+    // 使得setup内部可以通过getCurrentInstance接口获取当前实例
     setCurrentInstance(instance);
 
     const setupContext = createSetupContext(instance);
     // 真实的处理场景里面应该是只在 dev 环境才会把 props 设置为只读的
+    // 执行setup函数
     const setupResult =
       setup && setup(shallowReadonly(instance.props), setupContext);
 
@@ -112,7 +114,7 @@ function handleSetupResult(instance, setupResult) {
     // proxyRefs 的作用就是把 setupResult 对象做一层代理
     // 方便用户直接访问 ref 类型的值
     // 比如 setupResult 里面有个 count 是个 ref 类型的对象，用户使用的时候就可以直接使用 count 了，而不需要在 count.value
-    // 这里也就是官网里面说到的自动结构 Ref 类型
+    // 这里也就是官网里面说到的自动解构 Ref 类型
     instance.setupState = proxyRefs(setupResult);
   }
 
@@ -127,6 +129,8 @@ function finishComponentSetup(instance) {
 
   if (!instance.render) {
     // 如果 compile 有值 并且当然组件没有 render 函数，那么就需要把 template 编译成 render 函数
+    // 优先级：如果有组件有render就直接返回render
+    // 次优先：没有render则会通过compiler函数将template编译成render
     if (compile && !Component.render) {
       if (Component.template) {
         // 这里就是 runtime 模块和 compile 模块结合点
@@ -134,7 +138,7 @@ function finishComponentSetup(instance) {
         Component.render = compile(template);
       }
     }
-
+    // 将组件的render赋予到实例的render
     instance.render = Component.render;
   }
 

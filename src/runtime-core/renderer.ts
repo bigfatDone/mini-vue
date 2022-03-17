@@ -504,6 +504,7 @@ export function createRenderer(options) {
         const proxyToUse = instance.proxy;
         // 可在 render 函数中通过 this 来使用 proxy
         const subTree = (instance.subTree = normalizeVNode(
+          // proxyToUse可能是会用到的参数
           instance.render.call(proxyToUse, proxyToUse)
         ));
         console.log("subTree", subTree);
@@ -517,11 +518,7 @@ export function createRenderer(options) {
         // 这里我把这个行为隐喻成开箱
         // 一个组件就是一个箱子
         // 里面有可能是 element （也就是可以直接渲染的）
-        // 也有可能还是 component
-        // 这里就是递归的开箱
-        // 而 subTree 就是当前的这个箱子（组件）装的东西
-        // 箱子（组件）只是个概念，它实际是不需要渲染的
-        // 要渲染的是箱子里面的 subTree
+        //  
         patch(null, subTree, container, null, instance);
         // 把 root element 赋值给 组件的vnode.el ，为后续调用 $el 的时候获取值
         initialVNode.el = subTree.el;

@@ -7,8 +7,10 @@ export function emit(instance, event: string, ...rawArgs) {
   // 让事情变的复杂一点如果是烤肉串命名的话，需要转换成  change-page -> changePage
   // 需要得到事件名称
   const handlerName = toHandlerKey(camelize(event));
+  // 通过事件名获取执行事件
   const handler = props[handlerName];
   if (handler) {
+    // 执行事件，将所有剩余参数传进去
     handler(...rawArgs);
   }
 }

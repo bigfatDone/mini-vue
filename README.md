@@ -38,15 +38,15 @@ vx：cuixr1314
 
 - [x] 支持组件类型
 - [x] 支持 element 类型
-- [x] 初始化 props
-- [x] setup 可获取 props 和 context
-- [x] 支持 component emit
-- [x] 支持 proxy
-- [x] 可以在 render 函数中获取 setup 返回的对象
+- [x] 初始化 props --渲染函数的props属性
+- [x] setup 可获取 props 和 context --传进实例的属性
+- [x] 支持 component emit --匹配props的事件属性
+- [x] 支持 proxy --使用proxy代理instance
+- [x] 可以在 render 函数中获取 setup 返回的对象 --ref类型自动结构
 - [x] nextTick 的实现
-- [x] 支持 getCurrentInstance
+- [x] 支持 getCurrentInstance --setup内部
 - [x] 支持 provide/inject
-- [x] 支持最基础的 slots
+- [x] 支持最基础的 slots --子节点为slots，对象函数，匹配对应的事件
 - [x] 支持 Text 类型节点
 - [x] 支持 $el api
 

@@ -74,6 +74,7 @@ const shallowUnwrapHandlers = {
   },
   set(target, key, value, receiver) {
     const oldValue = target[key];
+    // 判断是否是oldValue是ref，修改参不是ref，就需要进行额外处理.value
     if (isRef(oldValue) && !isRef(value)) {
       return (target[key].value = value);
     } else {
