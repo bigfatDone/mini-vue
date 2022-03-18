@@ -18,7 +18,7 @@ export function provide(key, value) {
     if (parentProvides === provides) {
       provides = currentInstance.provides = Object.create(parentProvides);
     }
-
+    // 给实例添加上新增的provides
     provides[key] = value;
   }
 }

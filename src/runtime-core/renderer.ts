@@ -469,7 +469,7 @@ export function createRenderer(options) {
 
   function mountComponent(initialVNode, container, parentComponent) {
     // 1. 先创建一个 component instance
-    // 将组件内部的参数初始化
+    // 将组件内部的参数初始化, 将实例赋予component属性
     const instance = (initialVNode.component = createComponentInstance(
       initialVNode,
       parentComponent
@@ -504,7 +504,8 @@ export function createRenderer(options) {
         const proxyToUse = instance.proxy;
         // 可在 render 函数中通过 this 来使用 proxy
         const subTree = (instance.subTree = normalizeVNode(
-          // proxyToUse可能是会用到的参数
+          // 将render的执行环境指向被代理的ctx
+          // 第二个参proxyToUse可能是会用到的参数
           instance.render.call(proxyToUse, proxyToUse)
         ));
         console.log("subTree", subTree);
@@ -518,7 +519,7 @@ export function createRenderer(options) {
         // 这里我把这个行为隐喻成开箱
         // 一个组件就是一个箱子
         // 里面有可能是 element （也就是可以直接渲染的）
-        //  
+        // subtree指的是组件render里面的节点，component是父节点，render里面的return是子节点
         patch(null, subTree, container, null, instance);
         // 把 root element 赋值给 组件的vnode.el ，为后续调用 $el 的时候获取值
         initialVNode.el = subTree.el;
@@ -535,7 +536,7 @@ export function createRenderer(options) {
         // 如果有 next 的话， 说明需要更新组件的数据（props，slots 等）
         // 先更新组件的数据，然后更新完成后，在继续对比当前组件的子元素
         if (next) {
-          // 问题是 next 和 vnode 的区别是什么
+          // 问题是 next 和 vnode 的区别是什么 ==> 新节点和旧节点
           next.el = vnode.el;
           updateComponentPreRender(instance, next);
         }

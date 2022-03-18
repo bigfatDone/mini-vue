@@ -58,4 +58,16 @@ h(
 
 ## setup
 
-会执行setup函数，并且将参数也指定了。返回值会对ref进行自动解构
+会执行setup函数，并且将参数也指定了。返回值会对ref进行自动解构，通过设置setCurrentInstance来外暴当前实例。果然return一个函数则认为是render函数
+
+- todo:
+
+  - setup内部的生命周期钩子函数
+
+## component中的render
+
+判断有没有组件内部有没有render，有的话则直接赋予，没有的情况就要判断有没有template，就会将template进行compile，生成render。
+
+## update
+
+收集effect，将组件的挂载更新逻辑写在里面，一旦触发了update就会去patch新旧节点，将数据渲染到页面上去。
