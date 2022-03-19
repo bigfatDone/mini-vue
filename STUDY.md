@@ -71,3 +71,34 @@ h(
 ## update
 
 收集effect，将组件的挂载更新逻辑写在里面，一旦触发了update就会去patch新旧节点，将数据渲染到页面上去。
+
+## nextTick
+
+用promise来声明，主要是为了让里面的内容作为微任务执行，这样就会让同步执行的render任务先执行，后面的nextTick再加载。
+
+## mountedElement
+
+会首先根据type创建el，然后将props里面的参数都set到el上面。shapeFlag为element的的children会有两种情况一种是text，说明就是文字，直接set进dom就可以了。另外一种是array类型，这时候就要对children进行额外的处理了。
+
+## diff算法
+
+1. 从左往右遍历，遇到不同点中断，位置为i
+
+2. 从右往左遍历，e--，遇到不同点中断，位置为e1和e2
+
+3. e1 < i <= e2, 全为新增child； e2 < i <= e1, 全为旧的child
+
+4. 中间剩下的就是换了位置。
+
+   - 获取新child的下标和key
+
+   - 优化：设置新child的长度；遍历多的旧child：1.旧的有，但是新的没有，删除了；2.新旧的都有，就拿出这两个child进行比较。
+
+   - 遍历新child，找出旧的没有值，新的有值。说明是新增的。
+
+## 非diff算法
+
+- 只对最小公共长度的进行patch
+- 旧child长于新child，直接卸载
+- 旧child短于新child，直接mounted
+- 好暴力呀，我以为有什么可以优化判断的

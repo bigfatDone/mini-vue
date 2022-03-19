@@ -2,11 +2,10 @@
 import "./mini-core";
 import * as runtimeDom from "./runtime-dom";
 import { registerRuntimeCompiler } from "./runtime-dom";
-
 import { baseCompile } from "./compiler-core/src";
 export * from "./reactivity/src";
 export * from "./runtime-dom";
-
+export * from "./runtime-core/scheduler"
 
 function compileToFunction(template, options = {}) {
   const { code } = baseCompile(template, options);

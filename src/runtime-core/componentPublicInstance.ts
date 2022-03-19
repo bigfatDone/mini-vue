@@ -1,5 +1,5 @@
 import { hasOwn } from "../shared";
-
+// 这里是暴露了当前实例的$属性
 const publicPropertiesMap = {
   // 当用户调用 instance.proxy.$emit 时就会触发这个函数
   // i 就是 instance 的缩写 也就是组件实例对象
@@ -31,7 +31,7 @@ export const PublicInstanceProxyHandlers = {
     }
 
     const publicGetter = publicPropertiesMap[key];
-
+    // 在get操作对部分的$进行代理
     if (publicGetter) {
       return publicGetter(instance);
     }

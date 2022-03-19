@@ -36,26 +36,26 @@ vx：cuixr1314
 
 #### runtime-core
 
-- [x] 支持组件类型
-- [x] 支持 element 类型
+- [x] 支持组件类型 --创建组件，并且通过update函数收集更新渲染页面
+- [x] 支持 element 类型 --对txtchild和arraychild进行处理，diff算法优化
 - [x] 初始化 props --渲染函数的props属性
 - [x] setup 可获取 props 和 context --传进实例的属性
 - [x] 支持 component emit --匹配props的事件属性
 - [x] 支持 proxy --使用proxy代理instance
 - [x] 可以在 render 函数中获取 setup 返回的对象 --ref类型自动结构
-- [x] nextTick 的实现
+- [x] nextTick 的实现 --通过触发微任务执行cb
 - [x] 支持 getCurrentInstance --setup内部
-- [x] 支持 provide/inject
+- [x] 支持 provide/inject --通过getCurrentInstance给provides对象添加属性
 - [x] 支持最基础的 slots --子节点为slots，对象函数，匹配对应的事件
-- [x] 支持 Text 类型节点
-- [x] 支持 $el api
+- [x] 支持 Text 类型节点 --对比文本内容，进行更新
+- [x] 支持 $el api --在instance的proxy时候，在get操作进行拦截部分$开头字段，赋予当前实例的内部属性
 
 
 #### reactivity
 
 目标是用自己的 reactivity 支持现有的 demo 运行
 
-- [x] reactive 的实现
+- [x] reactive 的实现 --对对象代理
 - [x] ref 的实现
 - [x] readonly 的实现
 - [x] computed 的实现
@@ -69,7 +69,7 @@ vx：cuixr1314
 - [x] 支持 isReadonly
 - [x] 支持 isProxy
 - [x] 支持 shallowReadonly
-- [x] 支持 proxyRefs
+- [x] 支持 proxyRefs --自动解构
 
 ### compiler-core
 - [x] 解析插值

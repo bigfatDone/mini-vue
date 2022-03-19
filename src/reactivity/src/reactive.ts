@@ -15,6 +15,7 @@ export const enum ReactiveFlags {
 }
 
 export function reactive(target) {
+  // 可变处理器
   return createReactiveObject(target, reactiveMap, mutableHandlers);
 }
 

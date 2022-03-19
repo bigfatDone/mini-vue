@@ -65,6 +65,7 @@ function patchProp(el, key, preValue, nextValue) {
 
 function insert(child, parent, anchor = null) {
   console.log("Insert");
+  // anchor移动到某个锚点的前面
   parent.insertBefore(child, anchor);
 }
 

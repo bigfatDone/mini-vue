@@ -18,7 +18,7 @@ export const createVNode = function (
   const vnode = {
     el: null,
     component: null,
-    key: props?.key,
+    key: props?.key, // 会将props里面的key额外赋予
     type,
     props: props || {},
     children,

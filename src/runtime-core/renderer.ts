@@ -121,6 +121,7 @@ export function createRenderer(options) {
     for (const key in newProps) {
       const prevProp = oldProps[key];
       const nextProp = newProps[key];
+      // 新旧不一样，1：修改值，2：新增值
       if (prevProp !== nextProp) {
         // 对比属性
         // 需要交给 host 来更新 key
@@ -135,6 +136,7 @@ export function createRenderer(options) {
     for (const key in oldProps) {
       const prevProp = oldProps[key];
       const nextProp = null;
+      // 遍历新属性没有key，这里是直接删掉
       if (!(key in newProps)) {
         // 这里是以 oldProps 为基准来遍历，
         // 而且得到的值是 newProps 内没有的
@@ -184,6 +186,8 @@ export function createRenderer(options) {
       return n1.type === n2.type && n1.key === n2.key;
     };
 
+    // 1. 从左往右对比，到达最短的结束
+    // 遇到不同的就要中止，标志左边的不同起始点
     while (i <= e1 && i <= e2) {
       const prevChild = c1[i];
       const nextChild = c2[i];
@@ -199,7 +203,8 @@ export function createRenderer(options) {
       patch(prevChild, nextChild, container, parentAnchor, parentComponent);
       i++;
     }
-
+    // 2.从右往左
+    // 遇到不同的中止，标志右边的不同起始点
     while (i <= e1 && i <= e2) {
       // 从右向左取值
       const prevChild = c1[e1];
@@ -217,6 +222,7 @@ export function createRenderer(options) {
       e2--;
     }
 
+    // 3. 不同节点，旧的为0，新的为多
     if (i > e1 && i <= e2) {
       // 如果是这种情况的话就说明 e2 也就是新节点的数量大于旧节点的数量
       // 也就是说新增了 vnode
@@ -232,6 +238,7 @@ export function createRenderer(options) {
         patch(null, c2[i], container, anchor, parentComponent);
         i++;
       }
+    // 4. 不同节点，新的为0，旧的为多
     } else if (i > e2 && i <= e1) {
       // 这种情况的话说明新节点的数量是小于旧节点的数量的
       // 那么我们就需要把多余的
@@ -411,7 +418,7 @@ export function createRenderer(options) {
     console.log("DirectiveHook  -> beforeMount");
     console.log("transition  -> beforeEnter");
 
-    // 插入
+    // 插入，dom新增插入最前面元素
     hostInsert(el, container, anchor);
 
     // todo
@@ -421,6 +428,7 @@ export function createRenderer(options) {
     console.log("transition  -> enter");
   }
 
+  // 循环patch
   function mountChildren(children, container) {
     children.forEach((VNodeChild) => {
       // todo
