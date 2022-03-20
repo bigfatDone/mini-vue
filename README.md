@@ -55,7 +55,7 @@ vx：cuixr1314
 
 目标是用自己的 reactivity 支持现有的 demo 运行
 
-- [x] reactive 的实现 --对对象代理
+- [x] reactive 的实现 --对象代理，收集被代理过的对象（优化）
 - [x] ref 的实现
 - [x] readonly 的实现
 - [x] computed 的实现

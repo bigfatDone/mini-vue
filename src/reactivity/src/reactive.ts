@@ -4,8 +4,8 @@ import {
   shallowReadonlyHandlers,
 } from "./baseHandlers";
 
-export const reactiveMap = new WeakMap();
-export const readonlyMap = new WeakMap();
+export const reactiveMap = new WeakMap(); // 全部响应式
+export const readonlyMap = new WeakMap(); // 只读
 export const shallowReadonlyMap = new WeakMap();
 
 export const enum ReactiveFlags {
@@ -63,6 +63,7 @@ export function toRaw(value) {
 
 function createReactiveObject(target, proxyMap, baseHandlers) {
   // 核心就是 proxy
+  // 通过proxyMap收集代理过
   // 目的是可以侦听到用户 get 或者 set 的动作
 
   // 如果命中的话就直接返回就好了
@@ -75,6 +76,7 @@ function createReactiveObject(target, proxyMap, baseHandlers) {
   const proxy = new Proxy(target, baseHandlers);
 
   // 把创建好的 proxy 给存起来，
+  // 优化点，把代理过的直接收集起来
   proxyMap.set(target, proxy);
   return proxy;
 }
