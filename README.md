@@ -56,11 +56,11 @@ vx：cuixr1314
 目标是用自己的 reactivity 支持现有的 demo 运行
 
 - [x] reactive 的实现 --对象代理，收集被代理过的对象（优化）
-- [x] ref 的实现
-- [x] readonly 的实现
-- [x] computed 的实现
-- [x] track 依赖收集
-- [x] trigger 触发依赖
+- [x] ref 的实现 --类声明对value的get和set操作,输入object，这用reactive
+- [x] readonly 的实现 --只有读get操作，没有依赖收集
+- [x] computed 的实现 --调用computed就执行effect中的run(传入的回调函数)
+- [x] track 依赖收集 --在get操作上就会对数据进行track
+- [x] trigger 触发依赖 --更改数据进入get方法，触发之前收集到的effect
 - [x] 支持 isReactive
 - [x] 支持嵌套 reactive
 - [x] 支持 toRaw

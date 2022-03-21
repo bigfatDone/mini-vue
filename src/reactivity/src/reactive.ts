@@ -6,7 +6,7 @@ import {
 
 export const reactiveMap = new WeakMap(); // 全部响应式
 export const readonlyMap = new WeakMap(); // 只读
-export const shallowReadonlyMap = new WeakMap();
+export const shallowReadonlyMap = new WeakMap(); // 浅只读
 
 export const enum ReactiveFlags {
   IS_REACTIVE = "__v_isReactive",
@@ -40,6 +40,7 @@ export function isReadonly(value) {
 }
 
 export function isReactive(value) {
+  debugger
   // 如果 value 是 proxy 的话
   // 会触发 get 操作，而在 createGetter 里面会判断
   // 如果 value 是普通对象的话

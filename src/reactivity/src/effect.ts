@@ -10,6 +10,7 @@ export class ReactiveEffect {
   active = true;
   deps = [];
   public onStop?: () => void;
+  // 回调函数，调度器
   constructor(public fn, public scheduler?) {
     console.log("创建 ReactiveEffect 对象");
   }

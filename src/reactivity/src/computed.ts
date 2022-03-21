@@ -24,7 +24,7 @@ export class ComputedRefImpl {
   }
 
   get value() {
-    // 收集依赖
+    // 收集依赖，用ref来接
     trackRefValue(this);
     // 锁上，只可以调用一次
     // 当数据改变的时候才会解锁

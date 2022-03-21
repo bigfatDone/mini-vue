@@ -26,17 +26,21 @@ function createGetter(isReadonly = false, shallow = false) {
       key === ReactiveFlags.RAW && receiver === shallowReadonlyMap.get(target);
 
     if (key === ReactiveFlags.IS_REACTIVE) {
+      // 这里判断是reactive状态
       return !isReadonly;
     } else if (key === ReactiveFlags.IS_READONLY) {
+      // 这里判断是readonly
       return isReadonly;
     } else if (
       isExistInReactiveMap() ||
       isExistInReadonlyMap() ||
       isExistInShallowReadonlyMap()
     ) {
+      // 已经被代理过了，直接返回
       return target;
     }
 
+    // 使用reflect获取某个属性
     const res = Reflect.get(target, key, receiver);
 
     // 问题：为什么是 readonly 的时候不做依赖收集呢
@@ -65,6 +69,7 @@ function createGetter(isReadonly = false, shallow = false) {
 
 function createSetter() {
   return function set(target, key, value, receiver) {
+    // 用Reflect来声明属性，提倡es6
     const result = Reflect.set(target, key, value, receiver);
 
     // 在触发 set 的时候进行触发依赖

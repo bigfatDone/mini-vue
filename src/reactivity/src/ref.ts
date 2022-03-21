@@ -16,7 +16,7 @@ export class RefImpl {
     this._value = convert(value);
     this.dep = createDep();
   }
-
+  // get和set是对某个属性代理，看着是函数，其实是属性
   get value() {
     // 收集依赖
     trackRefValue(this);
@@ -39,6 +39,8 @@ export class RefImpl {
 export function ref(value) {
   return createRef(value);
 }
+
+// 如果是对象，直接转换成reactive了，不用value代理了
 
 function convert(value) {
   return isObject(value) ? reactive(value) : value;
