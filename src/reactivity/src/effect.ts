@@ -161,6 +161,7 @@ export function isTracking() {
 
 export function triggerEffects(dep) {
   // 执行收集到的所有的 effect 的 run 方法
+  // 有scheduler优先调用它，里面做了nextTicker逻辑
   for (const effect of dep) {
     if (effect.scheduler) {
       // scheduler 可以让用户自己选择调用的时机

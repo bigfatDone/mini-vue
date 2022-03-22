@@ -9,6 +9,7 @@ export function nextTick(fn) {
 }
 
 // 排队作业，添加执行
+// 在reactiveEffect里面用到
 export function queueJob(job) {
   if (!queue.includes(job)) {
     queue.push(job);

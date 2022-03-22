@@ -64,8 +64,8 @@ vx：cuixr1314
 - [x] 支持 isReactive
 - [x] 支持嵌套 reactive
 - [x] 支持 toRaw
-- [x] 支持 effect.scheduler
-- [x] 支持 effect.stop
+- [x] 支持 effect.scheduler -- 这个调度器用来执行额外的run(),里面可以写一些其他的逻辑
+- [x] 支持 effect.stop -- 从dep中删除effect(一个响应式实例)
 - [x] 支持 isReadonly
 - [x] 支持 isProxy
 - [x] 支持 shallowReadonly

@@ -3,7 +3,7 @@ import { ReactiveEffect } from "./effect";
 import { trackRefValue, triggerRefValue } from "./ref";
 
 export class ComputedRefImpl {
-  public dep: any;
+  public dep: any; // 用来收集当前effect对象
   public effect: ReactiveEffect;
 
   private _dirty: boolean;
@@ -11,7 +11,7 @@ export class ComputedRefImpl {
 
   constructor(getter) {
     this._dirty = true;
-    this.dep = createDep();
+    this.dep = createDep(); // 我觉得这个是关键
     this.effect = new ReactiveEffect(getter, () => {
       // scheduler
       // 只要触发了这个函数说明响应式对象的值发生改变了
@@ -19,7 +19,7 @@ export class ComputedRefImpl {
       if (this._dirty) return;
 
       this._dirty = true;
-      triggerRefValue(this);
+      // triggerRefValue(this);
     });
   }
 
