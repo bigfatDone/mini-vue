@@ -102,3 +102,9 @@ h(
 - 旧child长于新child，直接卸载
 - 旧child短于新child，直接mounted
 - 好暴力呀，我以为有什么可以优化判断的
+
+## track和trigger
+
+- 通过track收集effect，当前的reactive实例。
+
+- 通过trigger触发依赖，判断有scheduler就执行他，没有的话就执行实例的run()
