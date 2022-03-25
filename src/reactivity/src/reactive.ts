@@ -48,6 +48,7 @@ export function isReactive(value) {
   return !!value[ReactiveFlags.IS_REACTIVE];
 }
 
+// 获取之前没有代理的原始数据，不会触发track和trigger
 export function toRaw(value) {
   // 如果 value 是 proxy 的话 ,那么直接返回就可以了
   // 因为会触发 createGetter 内的逻辑
@@ -77,7 +78,7 @@ function createReactiveObject(target, proxyMap, baseHandlers) {
   const proxy = new Proxy(target, baseHandlers);
 
   // 把创建好的 proxy 给存起来，
-  // 优化点，把代理过的直接收集起来
+  // 优化点，把代理过的直接收集起来（原始值和代理值作为key和value）
   proxyMap.set(target, proxy);
   return proxy;
 }

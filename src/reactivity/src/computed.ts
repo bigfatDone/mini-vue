@@ -19,7 +19,7 @@ export class ComputedRefImpl {
       if (this._dirty) return;
 
       this._dirty = true;
-      // triggerRefValue(this);
+      triggerRefValue(this);
     });
   }
 

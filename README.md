@@ -59,17 +59,18 @@ vx：cuixr1314
 - [x] ref 的实现 --类声明对value的get和set操作,输入object，这用reactive
 - [x] readonly 的实现 --只有读get操作，没有依赖收集
 - [x] computed 的实现 --调用computed就执行effect中的run(传入的回调函数)
-- [x] track 依赖收集 --在get操作上就会对数据进行track
-- [x] trigger 触发依赖 --更改数据进入get方法，触发之前收集到的effect
+- [x] track 依赖收集 --在get操作上就会对数据进行track[用到effect或者ReactiveEffect声明的]
+- [x] trigger 触发依赖 --更改数据进入get方法，触发之前收集到的effect[用到effect或者ReactiveEffect声明的]
 - [x] 支持 isReactive --判断handler函数的isReadoly参数
 - [x] 支持嵌套 reactive --判断get操作，如果object类型，则继续reactive
-- [x] 支持 toRaw
+- [x] 支持 toRaw --没有经过proxy代理的原始数据
 - [x] 支持 effect.scheduler -- 这个调度器用来执行额外的run(),里面可以写一些其他的逻辑
 - [x] 支持 effect.stop -- 从dep中删除effect(一个响应式实例)
 - [x] 支持 isReadonly --判断handler函数的isReadlonly参数
 - [x] 支持 isProxy --调用isReactive和isReadoly方法
-- [x] 支持 shallowReadonly
+- [x] 支持 shallowReadonly --set操作只能代理第一层，对更加深层级的set是拦截不了的，只能在get操作上拦截对象，重新reactive。
 - [x] 支持 proxyRefs --自动解构
+- [x] proxy触发set操作，只能拦截第一层操作
 
 ### compiler-core
 - [x] 解析插值

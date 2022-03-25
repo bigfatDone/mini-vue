@@ -36,7 +36,7 @@ function createGetter(isReadonly = false, shallow = false) {
       isExistInReadonlyMap() ||
       isExistInShallowReadonlyMap()
     ) {
-      // 已经被代理过了，直接返回
+      // 直接返回原始值
       return target;
     }
 
@@ -98,12 +98,12 @@ export const mutableHandlers = {
 
 export const shallowReadonlyHandlers = {
   get: shallowReadonlyGet,
-  set(target, key) {
+  set(target, key, value, re) {
     // readonly 的响应式对象不可以修改值
     console.warn(
       `Set operation on key "${String(key)}" failed: target is readonly.`,
       target
     );
-    return true;
+    return Reflect.set(target, key, value, re);
   },
 };
