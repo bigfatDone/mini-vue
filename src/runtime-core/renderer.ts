@@ -364,7 +364,7 @@ export function createRenderer(options) {
           // 1. j 已经没有了 说明剩下的都需要移动了
           // 2. 最长子序列里面的值和当前的值匹配不上， 说明当前元素需要移动
           if (j < 0 || increasingNewIndexSequence[j] !== i) {
-            // 移动的话使用 insert 即可
+            // 移动的话使用 insert 即可,因为现在还是旧节点的排序，需要将旧节点的排序改成新节点的排序。
             hostInsert(nextChild.el, container, anchor);
           } else {
             // 这里就是命中了  index 和 最长递增子序列的值
